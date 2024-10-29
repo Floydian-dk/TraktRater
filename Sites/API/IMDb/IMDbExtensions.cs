@@ -19,7 +19,7 @@
                     retValue = IMDbType.Movie;
                     break;
                 case "documentary":
-                case "tv movie":
+                case "tvmovie":
                     retValue = IMDbType.Movie;
                     break;
                 case "tvshort":
@@ -33,14 +33,14 @@
                     break;
 
                 case "tvspecial":
-                case "tv mini series":
+                case "tvminiseries":
                     retValue = IMDbType.Show;
                     break;
                 case "tvseries":
                     retValue = IMDbType.Show;
                     break;
 
-                case "tv episode":
+                case "tvepisode":
                     retValue = IMDbType.Episode;
                     break;
                 
