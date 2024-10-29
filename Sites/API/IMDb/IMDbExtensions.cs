@@ -16,22 +16,31 @@
             switch (itemType.Replace(" ", "").ToLower())
             {
                 case "video":
+                    retValue = IMDbType.Movie;
+                    break;
                 case "documentary":
-                case "tvmovie":
+                case "tv movie":
+                    retValue = IMDbType.Movie;
+                    break;
                 case "tvshort":
                 case "featurefilm":
                 case "unknownwork":
                 case "movie":
                     retValue = IMDbType.Movie;
                     break;
+                case "short":
+                    retValue = IMDbType.Movie;
+                    break;
 
                 case "tvspecial":
-                case "tvminiseries":
+                case "tv mini series":
+                    retValue = IMDbType.Show;
+                    break;
                 case "tvseries":
                     retValue = IMDbType.Show;
                     break;
 
-                case "tvepisode":
+                case "tv episode":
                     retValue = IMDbType.Episode;
                     break;
                 

@@ -150,6 +150,7 @@
     <Compile Include="TraktAPI\DataStructures\TraktCommentItem.cs" />
     <Compile Include="TraktAPI\DataStructures\TraktComments.cs" />
     <Compile Include="TraktAPI\DataStructures\TraktEpisode.cs" />
+    <Compile Include="TraktAPI\DataStructures\TraktEpisodeDetails.cs" />
     <Compile Include="TraktAPI\DataStructures\TraktEpisodeEx.cs" />
     <Compile Include="TraktAPI\DataStructures\TraktEpisodeId.cs" />
     <Compile Include="TraktAPI\DataStructures\TraktEpisodeSummary.cs" />

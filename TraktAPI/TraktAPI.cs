@@ -722,6 +722,17 @@
             return response.FromJSONArray<TraktSeasonSummary>();
         }
 
+        /// <summary>
+        /// Get the episode details using IMDb ID
+        /// </summary>
+        /// <param name="id">The IMDb for the episode.</param>"
+        /// ToDo: Implement search using other ID's.
+        public static IEnumerable<TraktEpisodeDetails> GetEpisodeDetails(string id)
+        {
+            var response = TraktWeb.GetFromTrakt(string.Format(TraktURIs.IMDBSearch, id));
+            return response.FromJSONArray<TraktEpisodeDetails>();
+        }
+
         #endregion
     }
 }

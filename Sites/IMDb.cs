@@ -185,8 +185,16 @@
                 {
                     UIUtils.UpdateStatus($"Found {lCurrentUserShowRatings.Count()} user tv show ratings on trakt.tv");
                     // Filter out shows to rate from existing ratings online
-                    lRatedCsvShows.RemoveAll(s => lCurrentUserShowRatings.Any(c => (c.Show.Ids.ImdbId == s.Ids.ImdbId) || 
+                    if (AppSettings.ForceIMDbID == true)
+                    {
+                        lRatedCsvShows.RemoveAll(s => lCurrentUserShowRatings.Any(c => (c.Show.Ids.ImdbId == s.Ids.ImdbId)));
+
+                    }
+                    else
+                    {
+                        lRatedCsvShows.RemoveAll(s => lCurrentUserShowRatings.Any(c => (c.Show.Ids.ImdbId == s.Ids.ImdbId) || 
                                                                                    (c.Show.Title.ToLowerInvariant() == s.Title.ToLowerInvariant() && c.Show.Year == s.Year)));
+                    }
                 }
 
                 UIUtils.UpdateStatus($"Importing {lRatedCsvShows.Count()} tv show ratings to trakt.tv");

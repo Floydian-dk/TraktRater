@@ -72,6 +72,7 @@
             chkTMDbSyncWatchlist.Checked = AppSettings.TMDbSyncWatchlist;
 
             chkIMDbEnabled.Checked = AppSettings.EnableIMDb;
+            chkForceIMDbID.Checked = AppSettings.ForceIMDbID;
             lsImdbCustomLists.Items.AddRange(AppSettings.IMDbCustomLists.ToArray());
             txtImdbRatingsFilename.Text = AppSettings.IMDbRatingsFilename;
             txtImdbWatchlistFile.Text = AppSettings.IMDbWatchlistFilename;
@@ -406,6 +407,11 @@
                 EnableImdbCSVControls(rdnImdbCSV.Checked);
             }
         }
+        private void chkForceIMDbID_CheckedChanged(object sender, EventArgs e)
+        {
+            AppSettings.ForceIMDbID = chkForceIMDbID.Checked;
+        }
+
 
         private void chkTMDbEnabled_CheckedChanged(object sender, EventArgs e)
         {

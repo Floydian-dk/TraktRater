@@ -53,6 +53,7 @@
         const string cEnableTMDb = "EnableTMDb";
         const string cEnableTVDb = "EnableTVDb";
         const string cEnableIMDb = "EnableIMDb";
+        const string cForceIMDbID = "ForceIMDbID";
         const string cEnableListal = "EnableListal";
         const string cEnableCriticker = "EnableCriticker";
         const string cEnableLetterboxd = "EnableLetterboxd";
@@ -145,6 +146,8 @@
         public static bool EnableTVDb { get; set; }
         public static bool EnableTMDb { get; set; }
         public static bool EnableIMDb { get; set; }
+        public static bool ForceIMDbID { get; set; }
+
         public static bool EnableCheckMovies { get; set; }
         public static bool EnableListal { get; set; }
         public static bool EnableCriticker { get; set; }
@@ -229,6 +232,7 @@
                 MarkAsWatched = xmlReader.GetSettingValueAsBool(cMarkAsWatched, true);
                 IgnoreWatchedForWatchlist = xmlReader.GetSettingValueAsBool(cIgnoreWatchedForWatchlist, true);
                 EnableIMDb = xmlReader.GetSettingValueAsBool(cEnableIMDb, false);
+                ForceIMDbID = xmlReader.GetSettingValueAsBool(cForceIMDbID, false);
                 EnableTMDb = xmlReader.GetSettingValueAsBool(cEnableTMDb, false);
                 EnableTVDb = xmlReader.GetSettingValueAsBool(cEnableTVDb, false);
                 EnableListal = xmlReader.GetSettingValueAsBool(cEnableListal, false);
@@ -311,6 +315,7 @@
             xmlWriter.WriteSetting(cMarkAsWatched, MarkAsWatched.ToString());
             xmlWriter.WriteSetting(cIgnoreWatchedForWatchlist, IgnoreWatchedForWatchlist.ToString());
             xmlWriter.WriteSetting(cEnableIMDb, EnableIMDb.ToString());
+            xmlWriter.WriteSetting(cForceIMDbID, ForceIMDbID.ToString());
             xmlWriter.WriteSetting(cEnableTMDb, EnableTMDb.ToString());
             xmlWriter.WriteSetting(cEnableTVDb, EnableTVDb.ToString());
             xmlWriter.WriteSetting(cEnableListal, EnableListal.ToString());

@@ -422,7 +422,8 @@
                 
                 if (episode is IMDbRateItem)
                 {
-                    tvShowName = GetShowName((episode as IMDbRateItem).Title);
+                    // 2024-10-29: TV Show name is no longer included in export
+                    //tvShowName = GetShowName((episode as IMDbRateItem).Title);
                     tvEpisodeName = GetEpisodeName((episode as IMDbRateItem).Title);
                     tvEpisodeRating = (episode as IMDbRateItem).MyRating;
                     tvEpisodeRatedAt = (episode as IMDbRateItem).RatedDate;
@@ -430,16 +431,55 @@
                 }
                 else if (episode is IMDbListItem)
                 {
-                    tvShowName = GetShowName((episode as IMDbListItem).Title);
+                    //tvShowName = GetShowName((episode as IMDbListItem).Title);
                     tvEpisodeName = GetEpisodeName((episode as IMDbListItem).Title);
                     tvEpisodeWatchlistedAt = (episode as IMDbListItem).CreatedDate;
                     tvEpisodeImdbId = (episode as IMDbListItem).Id;
                 }
 
-                // get all seasons for show basis the tv show name 
+                // Try to look up episode by IMDb ID
+                // If this fails use season title and episode title instead.
+                UIUtils.UpdateStatus($"Getting episode details for '{tvEpisodeName}' using '{tvEpisodeImdbId}' on trakt.tv");
+
+                var searchResult = TraktAPI.TraktAPI.GetEpisodeDetails(tvEpisodeImdbId);
+
+                if (searchResult != null)
+                {
+                    var episodedetails = searchResult.FirstOrDefault();
+
+                    if (episodedetails != null && episodedetails.Type == "episode")
+                    {
+                        UIUtils.UpdateStatus($"Found details for '{tvEpisodeName}' using '{tvEpisodeImdbId}' on trakt.tv.");
+
+
+                        var imdbEpisodeInfo = new IMDbEpisode
+                        {
+                            EpisodeName = episodedetails.Episode.Title,
+                            EpisodeNumber = (int)episodedetails.Episode.Number,
+                            SeasonNumber = (int)episodedetails.Episode.Season,
+                            //ShowName = tvShowName,
+                            TraktId = (int)episodedetails.Episode.Ids.Trakt,
+                            Rating = tvEpisodeRating ?? 0,
+                            Created = episode is IMDbRateItem ? tvEpisodeRatedAt : tvEpisodeWatchlistedAt
+                        };
+
+                        return imdbEpisodeInfo;
+                    }
+                    UIUtils.UpdateStatus($"Failed to find details for '{tvEpisodeName}' using '{tvEpisodeImdbId}' on trakt.tv.", true);
+                    Thread.Sleep(2000);
+
+                    // If we force use of IMDb ID, exist search here.
+                    // Else we will try to use general search on Trakt.
+                    if (AppSettings.ForceIMDbID == true)
+                    {
+                        return null;
+                    }
+                }
+
+                // In case direct IMDB ID search fails, get all seasons for show basis the tv show name 
                 // the IMDb ID in CSV file is the episode ID and not show ID!
                 // the Year and Release Date is the episode Year and Release Date
-                UIUtils.UpdateStatus($"Getting sesaon/episode summary for tv show '{tvShowName}' on trakt.tv");
+                UIUtils.UpdateStatus($"Getting sesaon/episode summary for tv show '{tvShowName}' using general search on trakt.tv");
 
                 var searchResults = TraktAPI.TraktAPI.GetShowSeasons(tvShowName.ToSlug());
                 if (searchResults == null)
@@ -469,7 +509,7 @@
                     EpisodeName = episodeInfo.Title,
                     EpisodeNumber = (int)episodeInfo.Number,
                     SeasonNumber = (int)episodeInfo.Season,
-                    ShowName = tvShowName,
+                    //ShowName = tvShowName,
                     TraktId = (int)episodeInfo.Ids.Trakt,
                     Rating = tvEpisodeRating ?? 0,
                     Created = episode is IMDbRateItem ? tvEpisodeRatedAt : tvEpisodeWatchlistedAt

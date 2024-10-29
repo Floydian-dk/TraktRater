@@ -14,9 +14,9 @@
             Map(m => m.MyRating).Name("Your Rating");
             Map(m => m.RatedDate).Name("Date Rated");
             Map(m => m.Title).Name("Title");
+            Map(m => m.OriginalTitle).Name("Original Title");
             Map(m => m.Url).Name("URL");
             Map(m => m.Type).Name("Title Type");
-            Map(m => m.SiteRating).Name("IMDb Rating");
             Map(m => m.Runtime).Name("Runtime (mins)");
             Map(m => m.Year).Name("Year");
             Map(m => m.Genres).Name("Genres");
@@ -29,8 +29,8 @@
     public class IMDbRateItem
     {
         /// <summary>
-        /// Example Header as of 17th Aug 2019
-        /// Const,Your Rating,Date Rated,Title,URL,Title Type,IMDb Rating,Runtime (mins),Year,Genres,Num Votes,Release Date,Directors
+        /// Example Header as of 29th Oct 2024
+        /// Const,Your Rating,Date Rated,Title,Original Title,URL,Title Type,IMDb Rating,Runtime (mins),Year,Genres,Num Votes,Release Date,Directors
         /// </summary>
         public string Id { get; set; }
 
@@ -40,12 +40,12 @@
 
         public string Title { get; set; }
 
+        public string OriginalTitle { get; set; }
+
         public string Url { get; set; }
 
         public string Type { get; set; }
 
-        public float? SiteRating { get; set; }
-        
         public int? Runtime { get; set; }
 
         public int? Year { get; set; }

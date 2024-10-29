@@ -52,5 +52,7 @@
         public const string UserComments = @"https://api.trakt.tv/users/{0}/comments/{1}/{2}?extended={3}&page={4}&limit={5}&include_replies=false";
 
         public const string SeasonSummary = @"https://api.trakt.tv/shows/{0}/seasons?extended=episodes";
+
+        public const string IMDBSearch = @"https://api.trakt.tv/search/imdb/{0}";
     }
 }

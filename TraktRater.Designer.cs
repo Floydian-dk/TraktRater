@@ -164,6 +164,7 @@
             this.txtMovieLensRatings = new System.Windows.Forms.TextBox();
             this.chkMovieLensEnabled = new System.Windows.Forms.CheckBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.chkForceIMDbID = new System.Windows.Forms.CheckBox();
             this.grbTrakt.SuspendLayout();
             this.grbTVDb.SuspendLayout();
             this.grbReport.SuspendLayout();
@@ -537,6 +538,7 @@
             this.grbImdb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grbImdb.Controls.Add(this.chkForceIMDbID);
             this.grbImdb.Controls.Add(this.lblImdbNote);
             this.grbImdb.Controls.Add(this.lblImdbCustomLists);
             this.grbImdb.Controls.Add(this.btnImdbDeleteList);
@@ -1745,6 +1747,16 @@
             this.tabPage10.Text = "Options";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // chkForceIMDbID
+            // 
+            this.chkForceIMDbID.AutoSize = true;
+            this.chkForceIMDbID.Location = new System.Drawing.Point(90, 19);
+            this.chkForceIMDbID.Name = "chkForceIMDbID";
+            this.chkForceIMDbID.Size = new System.Drawing.Size(128, 17);
+            this.chkForceIMDbID.TabIndex = 17;
+            this.chkForceIMDbID.Text = "Force use of IMDb ID";
+            this.chkForceIMDbID.UseVisualStyleBackColor = true;
+            // 
             // TraktRater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1943,6 +1955,7 @@
         private System.Windows.Forms.Label lblLetterboxdWatchlist;
         private System.Windows.Forms.Button btnLetterboxdWatchlistBrowse;
         private System.Windows.Forms.TextBox txtLetterboxdWatchlistFile;
+        private System.Windows.Forms.CheckBox chkForceIMDbID;
     }
 }
 
